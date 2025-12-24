@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎂 Happy Birthday Urvashi! 🎂</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+      font-family: 'Arial', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #333;
+      overflow-x: hidden;
+    }
+    .container { width: 100%; max-width: 1200px; text-align: center; }
+    .header { margin-bottom: 30px; padding: 20px; }
+    h1 {
+      color: #d81b60;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: pulse 2s infinite;
+    }
+    .subtitle { color: #666; font-size: 1.2rem; margin-bottom: 10px; }
+    .slideshow-container {
+      width: 100%;
+      height: 600px;
+      position: relative;
+      margin: 30px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+      background: white;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .slide.active { opacity: 1; z-index: 1; }
+    .image-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .album-image {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+    .photo-number {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      z-index: 2;
+    }
+    .navigation { display: flex; justify-content: center; gap: 30px; margin-top: 40px; }
+    .nav-btn {
+      background: #d81b60;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+    }
+    .nav-btn:hover {
+      background: #c2185b;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+    }
+    .nav-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; opacity: 0.5; }
+    .page-indicators { display: flex; justify-content: center; gap: 10px; margin-top: 25px; flex-wrap: wrap; }
+    .page-dot { width: 12px; height: 12px; border-radius: 50%; background: #ddd; cursor: pointer; transition: all 0.3s ease; }
+    .page-dot.active { background: #d81b60; transform: scale(1.3); }
+    .message-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      margin: 40px auto;
+      max-width: 700px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+    .birthday-icon { font-size: 3rem; margin: 10px 0; animation: bounce 2s infinite; }
+    .name-highlight { color: #d81b60; font-weight: bold; font-size: 1.2em; }
+    .music-controls {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      padding: 12px;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 100;
+    }
+    .music-btn {
+      background: #d81b60;
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+    }
+    .music-btn:hover { background: #c2185b; }
+    .volume-slider { width: 100px; cursor: pointer; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { animation: fadeIn 0.5s ease forwards; }
+    @media (max-width: 768px) {
+      .slideshow-container { height: 500px; }
+      h1 { font-size: 2.2rem; }
+      .nav-btn { padding: 12px 20px; font-size: 1rem; }
+      .photo-number { font-size: 0.8rem; padding: 6px 12px; bottom: 15px; right: 15px; }
+    }
+    @media (max-width: 480px) {
+      .slideshow-container { height: 400px; }
+      h1 { font-size: 1.8rem; }
+      .navigation { flex-direction: column; gap: 15px; align-items: center; }
+      .nav-btn { width: 200px; justify-content: center; }
+      .music-controls { bottom: 10px; right: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="birthday-icon">🎂</div>
+      <h1>Happy Birthday <span class="name-highlight">Urvashi</span>! 🎉</h1>
+      <p class="subtitle">Happy Birthday! May God always keep you healthy and successful</p>
+      <p class="subtitle">Heartfelt birthday wishes to you. May this year be filled with happiness and joy</p>
+    </div>
+    <div class="slideshow-container" id="slideshow"></div>
+    <div class="page-indicators" id="pageIndicators"></div>
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn"><span>←</span> Previous</button>
+      <button class="nav-btn" id="nextBtn">Next <span>→</span></button>
+    </div>
+    <div class="message-card fade-in">
+      <h2 style="color: #d81b60; margin-bottom: 15px;">Dear <span class="name-highlight">Urvashi</span>,</h2>
+      <p>On your special day, I wanted to create something memorable just for you. Each photo in this collection represents a beautiful moment and memory that makes you the amazing person you are.</p>
+      <p style="margin-top: 15px;">May this year bring you endless joy, success in all your endeavors, and lots of amazing new memories. You deserve the very best because you're truly special!</p>
+      <p style="margin-top: 15px; font-weight: bold; color: #d81b60;">Happy Birthday, Urvashi! Wishing you a day as wonderful as you are! 🎈✨</p>
+    </div>
+  </div>
+  <div class="music-controls">
+    <button class="music-btn" id="playBtn">▶️</button>
+    <button class="music-btn" id="pauseBtn">⏸️</button>
+    <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-slider" id="volumeSlider">
+  </div>
+  <audio id="bgMusic" loop autoplay>
+    <source src="birthday-song-for-urvashi.mp3" type="audio/mpeg">
+    Your browser does not support audio playback.
+  </audio>
+  <script>
+    const photos = [
+      { url: "1.jpg" }, { url: "2.jpg" }, { url: "3.jpg" }, { url: "4.jpg" },
+      { url: "5.jpg" }, { url: "6.jpg" }, { url: "7.jpg" }, { url: "8.jpg" },
+      { url: "9.jpg" }, { url: "10.jpg" }, { url: "11.jpg" }, { url: "12.jpg" }
+    ];
+    let currentSlide = 0;
+    const slideshow = document.getElementById('slideshow');
+    const pageIndicators = document.getElementById('pageIndicators');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const music = document.getElementById('bgMusic');
+
+    function initSlideshow() {
+      slideshow.innerHTML = '';
+      pageIndicators.innerHTML = '';
+      photos.forEach((photo, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        if (index === 0) slide.classList.add('active');
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'image-container';
+        const img = document.createElement('img');
+        img.className = 'album-image';
+        img.src = photo.url;
+        img.alt = `Photo ${index + 1}`;
+        img.loading = "lazy";
+        img.onerror = function() {
+          this.src = `https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&h=600&fit=crop&auto=format&fit=crop&q=80`;
+        };
+        imageContainer.appendChild(img);
+        const photoNumber = document.createElement('div');
+        photoNumber.className = 'photo-number';
+        photoNumber.textContent = `${index + 1} / ${photos.length}`;
+        slide.appendChild(imageContainer);
+        slide.appendChild(photoNumber);
+        slideshow.appendChild(slide);
+        const dot = document.createElement('div');
+        dot.className = 'page-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => { goToSlide(index); });
+        pageIndicators.appendChild(dot);
+      });
+      prevBtn.addEventListener('click', prevSlide);
+      nextBtn.addEventListener('click', nextSlide);
+      updateButtons();
+      startMusicWithInteraction();
+    }
+
+    function startMusicWithInteraction() {
+      const playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log("Music started automatically");
+        }).catch(error => {
+          console.log("Auto-play prevented, waiting for user interaction");
+          const startMusicOnInteraction = () => {
+            music.play().then(() => {
+              console.log("Music started after user interaction");
+            }).catch(e => { console.log("Failed to start music:", e); });
+            document.removeEventListener('click', startMusicOnInteraction);
+            document.removeEventListener('keydown', startMusicOnInteraction);
+            document.removeEventListener('touchstart', startMusicOnInteraction);
+          };
+          document.addEventListener('click', startMusicOnInteraction, { once: true });
+          document.addEventListener('keydown', startMusicOnInteraction, { once: true });
+          document.addEventListener('touchstart', startMusicOnInteraction, { once: true });
+        });
+      }
+    }
+
+    function goToSlide(slideIndex) {
+      if (slideIndex === currentSlide) return;
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.page-dot');
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = slideIndex;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+      updateButtons();
+      if (currentSlide === photos.length - 1) {
+        setTimeout(createConfetti, 300);
+      }
+    }
+
+    function nextSlide() { if (currentSlide < photos.length - 1) goToSlide(currentSlide + 1); }
+    function prevSlide() { if (currentSlide > 0) goToSlide(currentSlide - 1); }
+    function updateButtons() {
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === photos.length - 1;
+    }
+
+    music.volume = volumeSlider.value;
+    playBtn.addEventListener('click', () => { music.play(); });
+    pauseBtn.addEventListener('click', () => { music.pause(); });
+    volumeSlider.addEventListener('input', (e) => { music.volume = e.target.value; });
+
+    function createConfetti() {
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.width = Math.random() * 15 + 5 + 'px';
+        confetti.style.height = Math.random() * 15 + 5 + 'px';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-30px';
+        confetti.style.zIndex = '9999';
+        confetti.style.pointerEvents = 'none';
+        document.body.appendChild(confetti);
+        const animation = confetti.animate([
+          { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+          { transform: `translateY(${window.innerHeight + 30}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+        ], { duration: Math.random() * 3000 + 2000, easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)' });
+        animation.onfinish = () => confetti.remove();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      else if (e.key === 'ArrowLeft') prevSlide();
+      else if (e.key === ' ') {
+        e.preventDefault();
+        if (music.paused) music.play(); else music.pause();
+      }
+    });
+    window.addEventListener('DOMContentLoaded', initSlideshow);
+  </script>
+</body>
+</html>
